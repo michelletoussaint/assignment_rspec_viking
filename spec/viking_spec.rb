@@ -95,11 +95,35 @@ describe Viking do
 
   end
 
+  let (:sven) {Viking.new("Sven",100,10,Bow.new)}
+
   describe "#attack" do
 
     it "causes recipient's health to drop" do
 
-      sven = Viking.new("Sven")
+      oleg.attack(sven)
+
+      expect(sven.health).to be < (100)
+
+    end
+
+    it "calls the #take_damage method" do
+
+      expect(oleg).to receive(:take_damage)
+
+      sven.attack(oleg)
+
+    end
+
+    specify "attacking with no weapon runs damage_with_fists" do
+
+      expect(oleg).to receive(:damage_with_fists).and_return(5)
+
+      oleg.attack(sven)
+
+    end
+
+    specify "attacking with no weapon deals fists multiplier times strenght" do
 
       oleg.attack(sven)
 
