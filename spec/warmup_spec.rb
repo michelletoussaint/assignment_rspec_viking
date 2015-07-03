@@ -19,18 +19,27 @@ describe Warmup do
 
   describe '#double_size' do
 
-    it 'takes an argument as parameter'
+    let(:my_double) { instance_double("Array", 'size' => 2) }
 
-      # expect(w.double_size('a'))to_
+    it 'takes an argument as parameter' do
+
+      expect{w.double_size('a')}.to_not raise_error
 
     end
 
-    it 'returns an error if no argument is sent'
+    it 'returns an error if no argument is sent' do
 
-    it 'returns an array double the size'
+      expect{w.double_size}.to raise_error(ArgumentError)
 
+    end
+
+    it 'returns double the length of the array' do
+
+      expect(w.double_size(my_double)).to eq(4)
+
+    end
 
   end
 
-
+  
 end
