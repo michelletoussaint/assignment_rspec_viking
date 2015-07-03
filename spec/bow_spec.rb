@@ -28,4 +28,22 @@ describe Bow do
 
   end
 
+  describe "#use" do 
+
+    it "reduces arrows by 1" do
+
+      my_bow.use
+      expect(my_bow.arrows).to eq(9)
+
+    end
+
+    it "throws an error if you use with no arrows left" do 
+
+      my_bow_2 = Bow.new(0)
+      expect{my_bow_2.use}.to raise_error("Out of arrows")
+
+    end
+
+  end
+
 end
