@@ -43,24 +43,43 @@ describe Warmup do
 
   describe '#calls_some_method' do
 
-    # let (:my_double) {double('upcase'=>)}
+    let (:my_double) { instance_double("String") }
 
-    it 'runs the upcase method' do 
+    it 'runs the upcase method' do
 
-      # allow(w).to receive(:upcase).and_return("HELLO")
+      expect(my_double).to receive(:upcase!)
 
-      # expect(w.calls_some_methods("hello")).to receive(:upcase).and_return("HELLO")
+      allow(my_double).to receive(:reverse!).and_return("olleH")
 
-      # expect(w.calls_some_methods("bye")).to receive(:upcase!)
-      # w.calls_some_methods("hello")
+      w.calls_some_methods(my_double)
 
     end
 
-    it 'runs the reverse method'
+    it 'runs the reverse method' do
+
+      allow(my_double).to receive(:upcase!).and_return true
+
+      expect(my_double).to receive(:reverse!)
+
+      w.calls_some_methods(my_double)
+
+    end
 
     it 'returns a set string' do
 
       expect(w.calls_some_methods('hello')).to eq('hahahaha this is a terrible method')
+    end
+
+    it "modifies a string" do
+
+      a = "Hello"
+
+      modified_a = "Hello"
+
+      w.calls_some_methods(modified_a)
+
+      expect(modified_a).to_not eq(a)
+
     end
 
 
