@@ -41,5 +41,30 @@ describe Warmup do
 
   end
 
+  describe '#calls_some_method' do
+
+    # let (:my_double) {double('upcase'=>)}
+
+    it 'runs the upcase method' do 
+
+      # allow(w).to receive(:upcase).and_return("HELLO")
+
+      # expect(w.calls_some_methods("hello")).to receive(:upcase).and_return("HELLO")
+
+      # expect(w.calls_some_methods("bye")).to receive(:upcase!)
+      # w.calls_some_methods("hello")
+
+    end
+
+    it 'runs the reverse method'
+
+    it 'returns a set string' do
+
+      expect(w.calls_some_methods('hello')).to eq('hahahaha this is a terrible method')
+    end
+
+
+  end
+
   
 end
