@@ -123,11 +123,57 @@ describe Viking do
 
     end
 
-    specify "attacking with no weapon deals fists multiplier times strenght" do
+    specify "attacking with no weapon deals fists multiplier times strength" do
 
       oleg.attack(sven)
 
       expect(sven.health).to eq(97.5)
+
+    end
+
+    specify "attacking with weapon runs #damage_with_weapon" do
+
+      expect(sven).to receive(:damage_with_weapon).and_return(50)
+
+      sven.attack(oleg)
+
+    end
+
+    specify "attacking with a weapon deals weapon multiplier times strength" do
+
+      sven.attack(oleg)
+
+      expect(oleg.health).to eq(80)
+
+    end
+
+    it "attacks with fists when out of arrows" do
+
+      new_guy = Viking.new("new_viking", 100,10,Bow.new(0))
+
+      expect(new_guy).to receive(:damage_with_fists).and_return(2.5)
+
+      new_guy.attack(oleg)
+
+      # expect(oleg.health).to eq(97.5)
+
+    end
+
+  end
+
+  describe "#check_death" do
+
+    let(:peter) { Viking.new("Peter", 1) }
+
+    it "raises an error when a viking dies" do
+
+      expect{peter.receive_attack(10)}.to raise_error("#{peter.name} has Died...")
+
+    end
+
+    it "raises an error when killing a viking" do
+
+      expect{oleg.attack(peter)}.to raise_error("#{peter.name} has Died...")
 
     end
 
